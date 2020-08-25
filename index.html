@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+		var xhr = new XMLHttpRequest();
+		var jsonData = {
+			'function': 'upload',
+			'args': {
+				'src': 'https://www.w3schools.com/html/pic_trulli.jpg',
+				'name': 'Test API file',
+				'category': 'Image',
+				'type': 'jpg'
+			}
+		}
+		var url = 'https://www.economitopia.com/api.php?data='+encodeURIComponent(JSON.stringify(jsonData));
+		xhr.open('GET',url,true);
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4
+			&& xhr.status === 200) {
+				var json = JSON.parse(xhr.responseText);
+				
+				if(json.error === true) {
+					console.log('Server returned error: '+json.errtype);
+				} else {
+					console.log('embedable link: '+json.embed_link);
+				}
+			}
+		};
+		xhr.send();
+
+		console.log('API TEST V1.0');
+		</script>
+		API TEST, I LOVE
+	</body>
+</html>
